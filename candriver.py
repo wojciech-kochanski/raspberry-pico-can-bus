@@ -488,15 +488,14 @@ class CanFrame():
         self.signals.append(signal)   
         
     def CalculateSignalValues(self):
-        if len(self.signals[]) > 0:
-            payload = 0        
-            for i, byte in enumerate(self.payload):
-                payload = payload+(byte << ( 8*(self.dlc - i-1) ))       
-            
-            # print("payload = %X" % payload)
-            for signal in self.signals:
-                mask, shift = self.GetSignalMaskAndShift(signal)                       
-                signal.SetRawValue((payload & mask) >> shift)
+        payload = 0        
+        for i, byte in enumerate(self.payload):
+            payload = payload+(byte << ( 8*(self.dlc - i-1) ))       
+        
+        # print("payload = %X" % payload)
+        for signal in self.signals:
+            mask, shift = self.GetSignalMaskAndShift(signal)                       
+            signal.SetRawValue((payload & mask) >> shift)
             
     def SetPayloadFromSignals(self):
         payload = 0
@@ -709,7 +708,7 @@ if __name__ == '__main__':
     print("--------------------------------------------------------")
     can = MCP2515()
     print("init...")
-    can.Init(speed="125KBPS")
+    can.Init(speed="1000KBPS")
     print("send data...")
     
     frame = CanFrame(id=0x332, payload =[0,0,0,0,0,0,0,0])    
@@ -760,3 +759,5 @@ if __name__ == '__main__':
         # can.Send(frame)    
     '''
     
+
+
