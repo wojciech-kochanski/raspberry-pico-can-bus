@@ -709,7 +709,7 @@ if __name__ == '__main__':
     print("--------------------------------------------------------")
     can = MCP2515()
     print("init...")
-    can.Init(speed="1000KBPS")
+    can.Init(speed="125KBPS")
     print("send data...")
     
     frame = CanFrame(id=0x332, payload =[0,0,0,0,0,0,0,0])    
@@ -760,4 +760,3 @@ if __name__ == '__main__':
         # can.Send(frame)    
     '''
     
-
